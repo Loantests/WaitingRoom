@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <form method="post" th:action="@{/simulations/save}">
+        <div class="tab-nav">
+          <div class="tab-nav-sim">
+            <h1>1</h1>
+            <p class="second-title">Simuler mon crédit</p>
+          </div>
+          <div class="tab-nav-coord">
+            <h1>2</h1>
+            <p class="second-title">Mes coordonnées</p>
+          </div>
+          <div class="tab-nav-info">
+            <h1>3</h1>
+            <p class="second-title">Mes infos personnelles</p>
+          </div>
+        </div>
+        <div class="tab">
+          <div class="tab-sim form-container">
+            <p>Mon projet</p>
+            <select name="project" id="project" th:field="*{simulation.project}">
+              <option value="'Jai besoin dargent'">J'ai besoin d'argent</option>
+              <option value="'Je finance mon vehicule doccasion'">Je finance mon véhicule d'occasion</option>
+              <option th:value="'Je gere mes imprevus'">Je gère mes imprévus</option>
+              <option value="'Je finance mon vehicule neuf'">Je finance mon véhicule neuf</option>
+              <option value="'Jequipe ma maison'">J'équipe ma maison</option>
+            </select>
+            <p>Je suis</p>
+            <select name="i_am" id="i_am" th:field="*{simulation.job}">
+              <option th:value="'Salarie du secteur prive'">Salarié du secteur privé</option>
+              <option th:value="'Fonctionnaire'">Fonctionnaire</option>
+              <option th:value="'Profession liberale'">Profession libérale</option>
+              <option th:value="'Commerçant'">Commerçant</option>
+              <option th:value="'Artisan'">Artisan</option>
+              <option th:value="'Retraite'">Retraité</option>
+              <option th:value="'Autre profession'">Autre profession</option>
+            </select>
+            <p>Montant (en DH)</p>
+            <input type="number" id="amount" th:value="${simulation.amount}" th:field="*{simulation.amount}" required/>
+            <p>Durée (en mois)</p>
+            <input type="number" id="duration" th:value="${simulation.duration}" th:field="*{simulation.duration}" required />
+            <p>Mensualités (en DH)</p>
+            <input type="number" id="monthly" th:value="${simulation.monthlyPayment}" th:field="*{simulation.monthlyPayment}" required />
+            <div class="button">
+              <a id="one">Continuer<span>sans engagement</span></a>
+            </div>
+          </div>
+          <div class="tab-coord form-container">
+            <input type="text" placeholder="Email*" id="email" th:value="${client.mailAddress}" th:field="*{client.mailAddress}" required />
+            <input type="text" placeholder="Téléphone mobile" id="phone" th:value="${client.phoneNumber}" th:field="*{client.phoneNumber}" required />
+            <div class="button">
+              <a id="two">Continuer<span>sans engagement</span></a>
+            </div>
+          </div>
+          <div class="tab-info">
+            <p>Civilité</p>
+            <div class="civility">
+              <input type="radio" th:name="${client.civility}" id="ms"/>
+              <p>Madame</p>
+              <input type="radio" th:name="${client.civility}" id="mlle" />
+              <p>Mademoiselle</p>
+              <input type="radio" th:name="${client.civility}" id="mr" />
+              <p>Monsieur</p>
+            </div>
+            <input type="text" class="info-input" placeholder="Nom*" th:value="${client.fname}" th:field="*{client.fname}"/>
+            <input type="text" class="info-input" placeholder="Prénom*" th:value="${client.lname}" th:field="*{client.lname}"/>
+            <input type="text" class="info-input" placeholder="Numéro CIN/Carte de séjour*" th:value="${client.idNumber}" th:field="*{client.idNumber}"/>
+            <p>Date de naissance</p>
+            <input type="text" class="info-input" placeholder="JJ/MM/YYYY*" th:value="${client.dob}" th:field="*{client.dob}"/>
+            <p>Date d'embauche/début d'activité</p>
+            <input type="text" class="info-input" placeholder="JJ/MM/YYYY*" th:value="${client.dateStartActivity}" th:field="*{client.dateStartActivity}"/>
+            <input type="text"  class="info-input" placeholder="Total revenus mensuels (net en DH)" th:value="${client.monthlyIncome}" th:field="*{client.monthlyIncome}"/>
+            <p>Avez vous des crédits en cours</p>
+            <div class="old">
+              <input type="radio" th:name="${client.oldClient}" id="oldYes">
+              <p>Oui</p>
+              <input type="radio" th:name="${client.oldClient}" id="oldNo">
+              <p>Non</p>
+            </div>
+            <div class="buttons">
+              <div class="button">
+                <input type="submit" id="three" value="Demander mon crédit">
+              <div class="button">
+                <input type="submit" id="four" value="Voir mon récapitulatif">
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </form>
+    </div>
+    <script th:src="@{/js/script.js}"></script>
+  </body>
+</html>
